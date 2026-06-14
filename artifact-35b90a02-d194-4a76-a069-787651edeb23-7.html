@@ -1,0 +1,781 @@
+
+                        <!DOCTYPE html>
+                        <html lang="en">
+                        <head>
+                            <meta charset="UTF-8">
+                            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+							<style>
+								body {
+									background-color: white; /* Ensure the iframe has a white background */
+								}
+
+								
+							</style>
+                        </head>
+                        <body>
+                            <!-- generated HTML -->
+<style>
+:root{
+  --bg:#eef6fb; --panel:#ffffff; --panel-2:#f7fbfe;
+  --text:#12344d; --muted:#6b8aa0; --teal:#00a6b2;
+  --blue:#1e88e5; --violet:#7c3aed; --border:#d7e7f3;
+  --shadow:0 10px 30px rgba(30,136,229,.08); --scgc-red:#e53935;
+}
+*{ box-sizing:border-box; margin:0; padding:0; }
+
+.login-screen{
+  position:absolute; inset:0; min-height:100vh;
+  background:linear-gradient(180deg,#f7fbff 0%,#eef6fb 100%);
+  display:flex; align-items:center; justify-content:center;
+  z-index:9999; padding:20px;
+}
+.login-card{
+  width:100%; max-width:390px; background:#fff;
+  border:1px solid var(--border); border-radius:18px;
+  padding:26px; box-shadow:var(--shadow);
+  font-family:'Segoe UI',Tahoma,sans-serif;
+}
+.login-logo{ font-size:1.5rem; font-weight:900; color:var(--scgc-red); letter-spacing:.5px; margin-bottom:8px; }
+.login-title{ font-size:1.1rem; font-weight:800; color:#0b5cab; margin-bottom:6px; }
+.login-subtitle{ font-size:.9rem; color:var(--muted); margin-bottom:18px; }
+.login-label{ display:block; font-size:.9rem; color:var(--text); margin-bottom:6px; font-weight:600; }
+.login-input{
+  width:100%; padding:11px 12px; border:1px solid #bfe3ef;
+  border-radius:10px; margin-bottom:14px; font-size:.95rem;
+  outline:none; background:#f8fcff; color:#12344d;
+}
+.login-input:focus{ border-color:var(--blue); box-shadow:0 0 0 3px rgba(30,136,229,.12); background:#fff; }
+.password-wrap{ position:relative; margin-bottom:12px; }
+.password-wrap .login-input{ margin-bottom:0; padding-right:92px; }
+.toggle-pass-btn{
+  position:absolute; right:8px; top:50%; transform:translateY(-50%);
+  background:#eaf4ff; color:#0b5cab; border:1px solid #cfe5fb;
+  border-radius:8px; padding:6px 10px; font-size:.78rem; font-weight:700; cursor:pointer;
+}
+.remember-row{ display:flex; align-items:center; gap:8px; margin-bottom:14px; font-size:.88rem; color:#34556f; }
+.remember-row input{ accent-color:#1e88e5; }
+.login-btn{
+  width:100%; padding:11px 14px; border:none; border-radius:12px; font-weight:800; cursor:pointer;
+  background:linear-gradient(90deg,var(--blue),var(--teal)); color:#fff; box-shadow:var(--shadow);
+}
+.login-error{ color:#be123c; font-size:.85rem; margin-top:12px; display:none; }
+
+.scgc-wrap{
+  font-family:'Segoe UI',Tahoma,sans-serif;
+  background:linear-gradient(180deg,#f7fbff 0%,#eef6fb 100%);
+  color:var(--text); padding:24px; border-radius:16px; border:1px solid var(--border);
+}
+.topbar{
+  display:flex; justify-content:space-between; align-items:flex-start;
+  gap:16px; margin-bottom:22px; border-bottom:1px solid var(--border); padding-bottom:16px;
+}
+.brand{ display:flex; align-items:center; gap:12px; flex-wrap:wrap; }
+.scgc-text-logo{ font-size:1.45rem; font-weight:900; letter-spacing:.6px; color:var(--scgc-red); line-height:1; }
+.tpe-badge{
+  font-size:.72rem; font-weight:700; color:#0b5cab;
+  background:#e3f2fd; border:1px solid #bbdefb; padding:4px 8px; border-radius:999px; line-height:1;
+}
+.title h1{ color:#0b5cab; font-size:1.9rem; margin:0; }
+.title p{ margin:6px 0 0; color:var(--muted); font-size:.92rem; }
+.meta-grid{
+  display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:8px 16px; margin-top:10px; font-size:.82rem; color:#5b7b93;
+}
+.actions{ display:flex; gap:8px; flex-wrap:wrap; margin-bottom:18px; align-items:center; }
+.btn{ border:none; border-radius:10px; padding:9px 13px; font-weight:700; cursor:pointer; box-shadow:var(--shadow); font-size:.84rem; }
+.btn-save{ background:linear-gradient(90deg,var(--blue),var(--teal)); color:#fff; }
+.btn-export{ background:#edf6ff; color:#0b5cab; border:1px solid #cfe5fb; }
+.btn-json{ background:#f3e8ff; color:#6d28d9; border:1px solid #ddd6fe; }
+.btn-gdrive{ background:#fff8e1; color:#e65100; border:1px solid #ffe082; }
+.btn-import{ background:#eefaf7; color:#0f766e; border:1px solid #b7ece5; }
+.btn-reset{ background:#fff1f2; color:#be123c; border:1px solid #fecdd3; }
+.btn-logout{ background:#ffffff; color:#475569; border:1px solid #dbe7f3; }
+.status{ font-size:.84rem; color:var(--teal); align-self:center; opacity:0; transition:.3s; min-width:140px; }
+.hidden-file{ display:none; }
+
+/* Chart.js loading indicator */
+.chart-loading{
+  display:flex; align-items:center; justify-content:center;
+  height:300px; color:var(--muted); font-size:.9rem; gap:10px;
+}
+.spinner{
+  width:22px; height:22px; border:3px solid #d7e7f3;
+  border-top-color:var(--blue); border-radius:50%;
+  animation:spin .7s linear infinite;
+}
+@keyframes spin{ to{ transform:rotate(360deg); } }
+
+/* Google Drive modal */
+.gdrive-modal-bg{
+  display:none; position:fixed; inset:0; background:rgba(0,0,0,.45);
+  z-index:10000; align-items:center; justify-content:center; padding:20px;
+}
+.gdrive-modal-bg.open{ display:flex; }
+.gdrive-modal{
+  background:#fff; border-radius:18px; padding:28px 26px;
+  max-width:440px; width:100%; box-shadow:0 20px 60px rgba(0,0,0,.18);
+  font-family:'Segoe UI',Tahoma,sans-serif;
+}
+.gdrive-modal h2{ color:#0b5cab; font-size:1.1rem; margin-bottom:6px; }
+.gdrive-modal p{ color:var(--muted); font-size:.88rem; margin-bottom:14px; line-height:1.6; }
+.gdrive-info{
+  background:#e8f4fd; border:1px solid #b3d9f5; border-radius:10px;
+  padding:10px 14px; font-size:.82rem; color:#0b5cab; margin-bottom:16px; line-height:1.7;
+}
+.gdrive-info strong{ display:block; margin-bottom:6px; font-size:.88rem; }
+.gdrive-step{ display:flex; gap:8px; align-items:flex-start; margin-bottom:6px; font-size:.82rem; color:#34556f; }
+.gdrive-step-num{
+  background:var(--blue); color:#fff; border-radius:50%;
+  width:20px; height:20px; min-width:20px; display:flex; align-items:center; justify-content:center;
+  font-size:.72rem; font-weight:800; margin-top:1px;
+}
+.gdrive-modal-actions{ display:flex; gap:10px; justify-content:flex-end; margin-top:6px; }
+
+.kpis{ display:grid; grid-template-columns:repeat(auto-fit,minmax(180px,1fr)); gap:16px; margin-bottom:22px; }
+.card{ background:var(--panel); border:1px solid var(--border); border-radius:14px; padding:16px; box-shadow:var(--shadow); }
+.kpi-card{ position:relative; overflow:hidden; }
+.kpi-card::before{
+  content:""; position:absolute; top:0; left:0; right:0; height:4px;
+  background:linear-gradient(90deg,var(--blue),var(--teal));
+}
+.kpi-label{ font-size:.74rem; color:var(--muted); text-transform:uppercase; letter-spacing:.5px; }
+.kpi-value{ font-size:1.65rem; font-weight:800; margin-top:8px; color:#0f4c81; }
+
+.grid{ display:grid; grid-template-columns:1.4fr 1.2fr; gap:18px; margin-bottom:22px; }
+.panel{ background:var(--panel); border:1px solid var(--border); border-radius:14px; padding:18px; box-shadow:var(--shadow); }
+.panel h3{ margin:0 0 14px; color:#3b6f96; font-size:.95rem; border-bottom:1px solid var(--border); padding-bottom:10px; }
+.chart-wrap{ position:relative; width:100%; height:300px; }
+.dual-donut-wrap{ display:grid; grid-template-columns:1fr 1fr; gap:18px; align-items:center; height:300px; }
+.mini-donut{ display:flex; flex-direction:column; align-items:center; justify-content:center; height:100%; }
+.donut-canvas-wrap{ position:relative; width:100%; height:180px; }
+.mini-title{ margin-bottom:8px; font-size:.9rem; font-weight:700; color:#3b6f96; }
+.mini-value{ margin-top:8px; font-size:1.1rem; font-weight:800; }
+
+.table-wrap{
+  background:var(--panel); border:1px solid var(--border); border-radius:14px;
+  padding:18px; box-shadow:var(--shadow); overflow-x:auto;
+}
+.table-head{ display:flex; justify-content:space-between; align-items:center; gap:12px; margin-bottom:10px; }
+.table-head h3{ margin:0; color:#3b6f96; font-size:.95rem; }
+.hint{ font-size:.8rem; color:var(--teal); }
+table{ width:100%; border-collapse:collapse; min-width:1450px; background:var(--panel); }
+th,td{ padding:12px; border-bottom:1px solid var(--border); text-align:center; font-size:.9rem; }
+th{ color:#1976d2; background:var(--panel-2); white-space:nowrap; }
+tr:hover td{ background:#f9fcff; }
+.row-label{ text-align:left; font-weight:700; color:#3b6f96; background:#f7fbfe; position:sticky; left:0; z-index:1; white-space:nowrap; }
+.plan-cell{ color:#56758d; font-weight:600; }
+.actual-input,.app-input{
+  width:88px; background:#f8fcff; color:#00838f; border:1px solid #bfe3ef;
+  border-radius:8px; padding:8px 10px; font-weight:700; outline:none; text-align:center;
+}
+.actual-input:focus,.app-input:focus{ border-color:var(--blue); box-shadow:0 0 0 3px rgba(30,136,229,.12); background:#fff; }
+.progress-cell{ color:#0b5cab; font-weight:800; }
+.app-cell{ color:var(--violet); font-weight:800; }
+.fallback-note{
+  margin-top:12px; padding:10px 12px; border-radius:10px;
+  background:#fff7ed; color:#9a3412; border:1px solid #fed7aa; font-size:.85rem; display:none;
+}
+@media(max-width:900px){
+  .grid{ grid-template-columns:1fr }
+  .topbar{ flex-direction:column; align-items:flex-start }
+  .dual-donut-wrap{ grid-template-columns:1fr; height:auto; }
+  .donut-canvas-wrap{ height:150px; }
+}
+</style>
+
+<!-- ═══ LOGIN ═══ -->
+<div id="loginScreen" class="login-screen">
+  <div class="login-card">
+    <div class="login-logo">SCGC</div>
+    <div class="login-title">Login — VOCs SHIFT B 2026</div>
+    <div class="login-subtitle">กรุณาเข้าสู่ระบบทุกครั้งก่อนใช้งาน Dashboard</div>
+    <label class="login-label">Username</label>
+    <input id="loginUser" class="login-input" type="text" autocomplete="off">
+    <label class="login-label">Password</label>
+    <div class="password-wrap">
+      <input id="loginPass" class="login-input" type="password" autocomplete="off">
+      <button type="button" class="toggle-pass-btn" onclick="togglePassword()">Show</button>
+    </div>
+    <label class="remember-row">
+      <input type="checkbox" id="rememberUserChk"><span>Remember user</span>
+    </label>
+    <button class="login-btn" onclick="login()">Login</button>
+    <div id="loginError" class="login-error">Username หรือ Password ไม่ถูกต้อง</div>
+  </div>
+</div>
+
+<!-- ═══ GOOGLE DRIVE MODAL ═══ -->
+<div id="gdriveModalBg" class="gdrive-modal-bg">
+  <div class="gdrive-modal">
+    <h2>☁️ บันทึกไปยัง Google Drive</h2>
+    <p>ระบบจะดาวน์โหลด JSON แล้วเปิด Google Drive ให้อัปโหลดด้วยตัวเอง</p>
+    <div class="gdrive-info">
+      <strong>📋 วิธีใช้งาน</strong>
+      <div class="gdrive-step"><div class="gdrive-step-num">1</div><div>กดปุ่ม <b>"ดาวน์โหลด JSON + เปิด Drive"</b></div></div>
+      <div class="gdrive-step"><div class="gdrive-step-num">2</div><div>ไฟล์ <b>VOCs_SHIFT_B_2026_Data.json</b> จะดาวน์โหลดอัตโนมัติ</div></div>
+      <div class="gdrive-step"><div class="gdrive-step-num">3</div><div>ลากไฟล์ที่ได้วางใน Google Drive ที่เปิดขึ้น</div></div>
+      <div class="gdrive-step"><div class="gdrive-step-num">4</div><div>ใช้ปุ่ม <b>"Import JSON"</b> เพื่อโหลดข้อมูลกลับมา</div></div>
+    </div>
+    <div class="gdrive-modal-actions">
+      <button class="btn btn-logout" onclick="closeGdriveModal()">ยกเลิก</button>
+      <button class="btn btn-gdrive" onclick="doGdriveSave()">☁️ ดาวน์โหลด JSON + เปิด Drive</button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ APP ═══ -->
+<div id="appContent" style="display:none;">
+  <div class="scgc-wrap">
+    <div class="topbar">
+      <div class="brand">
+        <div class="scgc-text-logo">SCGC</div>
+        <div class="tpe-badge">TPE</div>
+      </div>
+      <div class="title">
+        <h1>VOCs SHIFT B 2026</h1>
+        <p>SCGC Theme Dashboard · Category horizontal · Plan fixed · Actual & VOCs APP editable</p>
+        <div class="meta-grid">
+          <div>Last Login: <span id="lastLoginText">-</span></div>
+          <div>Last Update Data: <span id="lastUpdateText">-</span></div>
+          <div>Last Saved: <span id="lastSavedText">-</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="actions">
+      <button class="btn btn-save"   onclick="saveToLocal()">💾 Save</button>
+      <button class="btn btn-export" onclick="exportCSV()">📥 CSV</button>
+      <button class="btn btn-json"   onclick="exportJSON()">🗂️ JSON</button>
+      <button class="btn btn-gdrive" onclick="openGdriveModal()">☁️ Google Drive</button>
+      <button class="btn btn-import" onclick="document.getElementById('importJsonFile').click()">📤 Import JSON</button>
+      <input id="importJsonFile" class="hidden-file" type="file" accept=".json,application/json">
+      <button class="btn btn-reset"  onclick="resetAll()">🔄 Reset</button>
+      <button class="btn btn-logout" onclick="logout()">🔐 Logout</button>
+      <span class="status" id="statusText"></span>
+    </div>
+
+    <div class="kpis">
+      <div class="card kpi-card"><div class="kpi-label">Total Plan</div><div class="kpi-value" id="kpiPlan">0</div></div>
+      <div class="card kpi-card"><div class="kpi-label">Total Actual</div><div class="kpi-value" id="kpiActual" style="color:var(--teal)">0</div></div>
+      <div class="card kpi-card"><div class="kpi-label">Overall Progress</div><div class="kpi-value" id="kpiProgress" style="color:var(--blue)">0%</div></div>
+      <div class="card kpi-card"><div class="kpi-label">VOCs APP</div><div class="kpi-value" id="kpiApp" style="color:var(--violet)">0</div></div>
+      <div class="card kpi-card"><div class="kpi-label">VOCs Progress %</div><div class="kpi-value" id="kpiVocsProgress" style="color:var(--violet)">0%</div></div>
+    </div>
+
+    <div class="grid">
+      <div class="panel">
+        <h3>Bar Chart: Plan vs Actual by Category</h3>
+        <div id="barLoading" class="chart-loading"><div class="spinner"></div> กำลังโหลด Chart...</div>
+        <div class="chart-wrap" id="barWrap" style="display:none;">
+          <canvas id="barChart"></canvas>
+        </div>
+        <div class="fallback-note" id="barFallback">❌ ไม่สามารถโหลด Chart.js ได้ — กรุณาเชื่อมต่ออินเทอร์เน็ตแล้วรีเฟรช</div>
+      </div>
+      <div class="panel">
+        <h3>Progress & VOCs Progress</h3>
+        <div id="donutLoading" class="chart-loading"><div class="spinner"></div> กำลังโหลด Chart...</div>
+        <div class="dual-donut-wrap" id="donutWrap" style="display:none;">
+          <div class="mini-donut">
+            <div class="mini-title">Progress</div>
+            <div class="donut-canvas-wrap"><canvas id="progressDonut"></canvas></div>
+            <div class="mini-value" id="progressDonutValue" style="color:var(--teal)">0%</div>
+          </div>
+          <div class="mini-donut">
+            <div class="mini-title">VOCs Progress</div>
+            <div class="donut-canvas-wrap"><canvas id="vocsDonut"></canvas></div>
+            <div class="mini-value" id="vocsDonutValue" style="color:var(--violet)">0%</div>
+          </div>
+        </div>
+        <div class="fallback-note" id="donutFallback">❌ ไม่สามารถโหลด Chart.js ได้ — กรุณาเชื่อมต่ออินเทอร์เน็ตแล้วรีเฟรช</div>
+      </div>
+    </div>
+
+    <div class="table-wrap">
+      <div class="table-head">
+        <h3>Detail Data Table</h3>
+        <div class="hint">แก้ไขได้ที่ Actual และ VOCs APP เท่านั้น</div>
+      </div>
+      <table>
+        <thead><tr id="categoryRow"><th class="row-label">Category</th></tr></thead>
+        <tbody>
+          <tr id="planRow"><td class="row-label">Plan</td></tr>
+          <tr id="actualRow"><td class="row-label">Actual</td></tr>
+          <tr id="progressRow"><td class="row-label">Progress (%)</td></tr>
+          <tr id="appRow"><td class="row-label">VOCs APP</td></tr>
+          <tr id="vocsProgressRow"><td class="row-label">VOCs Progress (%)</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+  ✅ Chart.js loader:
+     1) ลอง local path (Open WebUI)
+     2) fallback → jsDelivr CDN (เปิดไฟล์ .html ตรงๆ)
+     3) fallback → unpkg CDN
+════════════════════════════════════════════════════ -->
+<script>
+(function(){
+  var SOURCES = [
+    '/static/libraries/chart.js/4.5.1/chart.umd.js',
+    'https://cdn.jsdelivr.net/npm/chart.js@4.5.1/dist/chart.umd.min.js',
+    'https://unpkg.com/chart.js@4.5.1/dist/chart.umd.min.js'
+  ];
+  var idx = 0;
+  var resolve, reject;
+  window.__chartReady = new Promise(function(res, rej){ resolve = res; reject = rej; });
+
+  function tryLoad(){
+    if(idx >= SOURCES.length){ reject(new Error('All Chart.js sources failed')); return; }
+    var s = document.createElement('script');
+    s.src = SOURCES[idx++];
+    s.onload  = function(){ resolve(); };
+    s.onerror = function(){ tryLoad(); };        /* ลอง source ถัดไป */
+    document.head.appendChild(s);
+  }
+  tryLoad();
+})();
+</script>
+
+<script>
+/* ══════════════════════════════════════════
+   CONSTANTS
+══════════════════════════════════════════ */
+const USER_PARTS=['shift','bvery','good'];
+const PASS_PARTS=['BHK','TKT'];
+const LOGIN_USER=USER_PARTS.join('');
+const LOGIN_PASS=PASS_PARTS.join('');
+const STORAGE_KEY            ='VOCS_SHIFT_B_2026_FORCE_LOGIN';
+const LAST_LOGIN_KEY         ='VOCS_SHIFT_B_LAST_LOGIN';
+const LAST_UPDATE_KEY        ='VOCS_SHIFT_B_LAST_UPDATE';
+const LAST_SAVED_KEY         ='VOCS_SHIFT_B_LAST_SAVED';
+const REMEMBER_USER_KEY      ='VOCS_SHIFT_B_REMEMBER_USER';
+const REMEMBER_USER_FLAG_KEY ='VOCS_SHIFT_B_REMEMBER_USER_FLAG';
+
+const categories=[
+  "Brine","Waste Cat","Catalyst PZ","Catalyst AT","Oil #400",
+  "TK-2401-TK-401","Vent Gas #100","Vent Gas #200","Vent Gas#300",
+  "Vent Gas#400","Vent Gas#700"
+];
+const planValues=[630,166,333,564,520,30,347,555,83,28,292];
+let actualValues=planValues.map(()=>0);
+let appValues   =planValues.map(()=>0);
+
+let barChartInst  =null;
+let progressDonut =null;
+let vocsDonut     =null;
+let appInitialized=false;
+let inputAbortCtrl=null;
+
+/* ══════════════════════════════════════════
+   localStorage WRAPPER (sandbox-safe)
+══════════════════════════════════════════ */
+const _mem={};
+const LS={
+  get(k){    try{return localStorage.getItem(k);}    catch(e){return _mem[k]??null;} },
+  set(k,v){  try{localStorage.setItem(k,v);}         catch(e){_mem[k]=v;} },
+  remove(k){ try{localStorage.removeItem(k);}        catch(e){delete _mem[k];} }
+};
+
+/* ══════════════════════════════════════════
+   HELPERS
+══════════════════════════════════════════ */
+function fmtDT(ts){
+  if(!ts) return '-';
+  const d=new Date(ts);
+  if(isNaN(d.getTime())) return '-';
+  return d.toLocaleString('th-TH',{year:'numeric',month:'2-digit',day:'2-digit',
+    hour:'2-digit',minute:'2-digit',second:'2-digit'});
+}
+function setMetaTexts(){
+  const g=id=>document.getElementById(id);
+  if(g('lastLoginText'))  g('lastLoginText').textContent =fmtDT(LS.get(LAST_LOGIN_KEY));
+  if(g('lastUpdateText')) g('lastUpdateText').textContent=fmtDT(LS.get(LAST_UPDATE_KEY));
+  if(g('lastSavedText'))  g('lastSavedText').textContent =fmtDT(LS.get(LAST_SAVED_KEY));
+}
+function markLastUpdate(ts){ LS.set(LAST_UPDATE_KEY,ts||new Date().toISOString()); setMetaTexts(); }
+function markLastSaved(ts){  LS.set(LAST_SAVED_KEY, ts||new Date().toISOString()); setMetaTexts(); }
+function showStatus(msg,color){
+  const el=document.getElementById('statusText');
+  el.textContent=msg; el.style.color=color||'var(--teal)'; el.style.opacity=1;
+  setTimeout(()=>el.style.opacity=0,2200);
+}
+
+/* ══════════════════════════════════════════
+   REMEMBER USER
+══════════════════════════════════════════ */
+function loadRememberedUser(){
+  const ok  =LS.get(REMEMBER_USER_FLAG_KEY)==='1';
+  const user=LS.get(REMEMBER_USER_KEY)||'';
+  const inp =document.getElementById('loginUser');
+  const chk =document.getElementById('rememberUserChk');
+  if(chk) chk.checked=ok;
+  if(inp) inp.value=ok?user:'';
+}
+function applyRememberUserSetting(){
+  const chk=document.getElementById('rememberUserChk');
+  const user=document.getElementById('loginUser').value.trim();
+  if(chk&&chk.checked){ LS.set(REMEMBER_USER_FLAG_KEY,'1'); LS.set(REMEMBER_USER_KEY,user); }
+  else{ LS.remove(REMEMBER_USER_FLAG_KEY); LS.remove(REMEMBER_USER_KEY); }
+}
+
+/* ══════════════════════════════════════════
+   AUTH
+══════════════════════════════════════════ */
+function togglePassword(){
+  const inp=document.getElementById('loginPass');
+  const btn=document.querySelector('.toggle-pass-btn');
+  if(inp.type==='password'){inp.type='text';btn.textContent='Hide';}
+  else{inp.type='password';btn.textContent='Show';}
+}
+function login(){
+  const user=document.getElementById('loginUser').value.trim();
+  const pass=document.getElementById('loginPass').value;
+  const err =document.getElementById('loginError');
+  if(user===LOGIN_USER&&pass===LOGIN_PASS){
+    LS.set(LAST_LOGIN_KEY,new Date().toISOString());
+    applyRememberUserSetting();
+    document.getElementById('loginScreen').style.display='none';
+    document.getElementById('appContent').style.display='block';
+    err.style.display='none';
+    setMetaTexts();
+    initAppOnce();
+  } else { err.style.display='block'; }
+}
+
+function freshCanvas(id){
+  const old=document.getElementById(id); if(!old) return;
+  const neo=document.createElement('canvas'); neo.id=id;
+  old.parentNode.replaceChild(neo,old);
+}
+function logout(){
+  document.getElementById('appContent').style.display='none';
+  document.getElementById('loginScreen').style.display='flex';
+  document.getElementById('loginPass').value='';
+  document.getElementById('loginPass').type='password';
+  const btn=document.querySelector('.toggle-pass-btn');
+  if(btn) btn.textContent='Show';
+  appInitialized=false;
+  actualValues=planValues.map(()=>0);
+  appValues   =planValues.map(()=>0);
+  if(barChartInst) {barChartInst.destroy(); barChartInst=null;}
+  if(progressDonut){progressDonut.destroy();progressDonut=null;}
+  if(vocsDonut)    {vocsDonut.destroy();    vocsDonut=null;}
+  freshCanvas('barChart'); freshCanvas('progressDonut'); freshCanvas('vocsDonut');
+  /* reset chart panels */
+  ['barWrap','donutWrap'].forEach(id=>{
+    const el=document.getElementById(id); if(el) el.style.display='none';
+  });
+  ['barLoading','donutLoading'].forEach(id=>{
+    const el=document.getElementById(id); if(el) el.style.display='flex';
+  });
+  loadRememberedUser();
+}
+function checkLogin(){
+  document.getElementById('loginScreen').style.display='flex';
+  document.getElementById('appContent').style.display='none';
+  setMetaTexts(); loadRememberedUser();
+}
+
+/* ══════════════════════════════════════════
+   CALCULATIONS
+══════════════════════════════════════════ */
+function calcProgress(a,p){ return(!p||p<=0)?0:((a/p)*100).toFixed(1); }
+function calcVocsProgress(v,a){ return(!a||a<=0)?0:((v/a)*100).toFixed(1); }
+function getOverallProgress(){
+  const tp=planValues.reduce((a,b)=>a+b,0), ta=actualValues.reduce((a,b)=>a+b,0);
+  return tp?(ta/tp)*100:0;
+}
+function getOverallVocsProgress(){
+  const ta=actualValues.reduce((a,b)=>a+b,0), tv=appValues.reduce((a,b)=>a+b,0);
+  return ta?(tv/ta)*100:0;
+}
+
+/* ══════════════════════════════════════════
+   KPIs
+══════════════════════════════════════════ */
+function updateKPIs(){
+  const tp=planValues.reduce((a,b)=>a+b,0);
+  const ta=actualValues.reduce((a,b)=>a+b,0);
+  const tv=appValues.reduce((a,b)=>a+b,0);
+  const pct=tp?((ta/tp)*100).toFixed(1):'0.0';
+  const vpc=ta?((tv/ta)*100).toFixed(1):'0.0';
+  document.getElementById('kpiPlan').textContent           =tp.toLocaleString();
+  document.getElementById('kpiActual').textContent         =ta.toLocaleString();
+  document.getElementById('kpiProgress').textContent       =pct+'%';
+  document.getElementById('kpiApp').textContent            =tv.toLocaleString();
+  document.getElementById('kpiVocsProgress').textContent   =vpc+'%';
+  document.getElementById('progressDonutValue').textContent=pct+'%';
+  document.getElementById('vocsDonutValue').textContent    =vpc+'%';
+}
+
+/* ══════════════════════════════════════════
+   TABLE
+══════════════════════════════════════════ */
+function renderHorizontalTable(){
+  const R=id=>document.getElementById(id);
+  R('categoryRow').innerHTML  ='<th class="row-label">Category</th>';
+  R('planRow').innerHTML      ='<td class="row-label">Plan</td>';
+  R('actualRow').innerHTML    ='<td class="row-label">Actual</td>';
+  R('progressRow').innerHTML  ='<td class="row-label">Progress (%)</td>';
+  R('appRow').innerHTML       ='<td class="row-label">VOCs APP</td>';
+  R('vocsProgressRow').innerHTML='<td class="row-label">VOCs Progress (%)</td>';
+  categories.forEach((cat,i)=>{
+    const th=document.createElement('th');
+    th.textContent=cat; R('categoryRow').appendChild(th);
+    const tdP=document.createElement('td');
+    tdP.className='plan-cell'; tdP.textContent=planValues[i].toLocaleString();
+    R('planRow').appendChild(tdP);
+    const tdA=document.createElement('td');
+    tdA.innerHTML=`<input class="actual-input" type="number" min="0" step="1" value="${actualValues[i]}" data-index="${i}" data-type="actual"/>`;
+    R('actualRow').appendChild(tdA);
+    const tdPr=document.createElement('td');
+    tdPr.className='progress-cell'; tdPr.id='progress-'+i;
+    tdPr.textContent=calcProgress(actualValues[i],planValues[i])+'%';
+    R('progressRow').appendChild(tdPr);
+    const tdV=document.createElement('td');
+    tdV.innerHTML=`<input class="app-input" type="number" min="0" step="1" value="${appValues[i]}" data-index="${i}" data-type="app"/>`;
+    R('appRow').appendChild(tdV);
+    const tdVP=document.createElement('td');
+    tdVP.className='app-cell'; tdVP.id='vocs-progress-'+i;
+    tdVP.textContent=calcVocsProgress(appValues[i],actualValues[i])+'%';
+    R('vocsProgressRow').appendChild(tdVP);
+  });
+  bindInputs();
+}
+function bindInputs(){
+  if(inputAbortCtrl) inputAbortCtrl.abort();
+  inputAbortCtrl=new AbortController();
+  document.querySelectorAll('.actual-input,.app-input').forEach(inp=>{
+    inp.addEventListener('input',handleInputChange,{signal:inputAbortCtrl.signal});
+  });
+}
+function handleInputChange(e){
+  const idx=Number(e.target.dataset.index);
+  const val=parseFloat(e.target.value)||0;
+  if(e.target.dataset.type==='actual') actualValues[idx]=val;
+  else appValues[idx]=val;
+  const pc=document.getElementById('progress-'+idx);
+  if(pc) pc.textContent=calcProgress(actualValues[idx],planValues[idx])+'%';
+  const vc=document.getElementById('vocs-progress-'+idx);
+  if(vc) vc.textContent=calcVocsProgress(appValues[idx],actualValues[idx])+'%';
+  markLastUpdate(); updateKPIs(); updateCharts();
+}
+
+/* ══════════════════════════════════════════
+   CHARTS  ✅ รอ __chartReady Promise
+══════════════════════════════════════════ */
+function makeDonut(id,color){
+  const el=document.getElementById(id); if(!el) return null;
+  return new Chart(el,{
+    type:'doughnut',
+    data:{ labels:['Done','Remaining'], datasets:[{data:[0,100],backgroundColor:[color,'#d9ecf7'],borderWidth:0}] },
+    options:{ responsive:true, maintainAspectRatio:false, cutout:'72%', animation:{duration:600}, plugins:{legend:{display:false}} }
+  });
+}
+
+function initCharts(){
+  window.__chartReady
+    .then(()=>{
+      /* ✅ defer 1 frame หลัง Chart.js โหลดเสร็จ */
+      requestAnimationFrame(()=>{
+        /* ซ่อน loading / แสดง wrap */
+        document.getElementById('barLoading').style.display  ='none';
+        document.getElementById('donutLoading').style.display='none';
+        document.getElementById('barWrap').style.display     ='block';
+        document.getElementById('donutWrap').style.display   ='grid';
+
+        if(!barChartInst){
+          barChartInst=new Chart(document.getElementById('barChart'),{
+            type:'bar',
+            data:{
+              labels:categories,
+              datasets:[
+                {label:'Plan',  data:[...planValues],  backgroundColor:'#bbdefb',borderColor:'#64b5f6',borderWidth:1,borderRadius:8},
+                {label:'Actual',data:[...actualValues],backgroundColor:'#00a6b2',borderRadius:8}
+              ]
+            },
+            options:{
+              responsive:true, maintainAspectRatio:false, animation:{duration:600},
+              plugins:{legend:{labels:{color:'#12344d',usePointStyle:true}}},
+              scales:{
+                y:{beginAtZero:true,ticks:{color:'#6b8aa0'},grid:{color:'#e3eef7'}},
+                x:{ticks:{color:'#6b8aa0',maxRotation:45,minRotation:45},grid:{display:false}}
+              }
+            }
+          });
+        }
+        if(!progressDonut) progressDonut=makeDonut('progressDonut','#00a6b2');
+        if(!vocsDonut)     vocsDonut    =makeDonut('vocsDonut',    '#7c3aed');
+        updateCharts();
+      });
+    })
+    .catch(()=>{
+      /* Chart.js โหลดไม่ได้เลยทั้ง 3 sources */
+      document.getElementById('barLoading').style.display  ='none';
+      document.getElementById('donutLoading').style.display='none';
+      document.getElementById('barFallback').style.display  ='block';
+      document.getElementById('donutFallback').style.display='block';
+    });
+}
+
+function updateCharts(){
+  if(barChartInst){
+    barChartInst.data.datasets[0].data=[...planValues];
+    barChartInst.data.datasets[1].data=[...actualValues];
+    barChartInst.update();
+  }
+  const op=getOverallProgress(), ov=getOverallVocsProgress();
+  if(progressDonut){progressDonut.data.datasets[0].data=[op,Math.max(0,100-op)];progressDonut.update();}
+  if(vocsDonut)    {vocsDonut.data.datasets[0].data=[ov,Math.max(0,100-ov)];    vocsDonut.update();}
+}
+
+/* ══════════════════════════════════════════
+   SAVE / LOAD / RESET
+══════════════════════════════════════════ */
+function saveToLocal(){
+  try{
+    LS.set(STORAGE_KEY,JSON.stringify({actualValues:[...actualValues],appValues:[...appValues]}));
+    markLastSaved(); showStatus('✅ Saved');
+  }catch(e){ showStatus('❌ Save failed','#be123c'); }
+}
+function loadFromLocal(){
+  const raw=LS.get(STORAGE_KEY); if(!raw) return;
+  try{
+    const d=JSON.parse(raw);
+    if(Array.isArray(d.actualValues)&&d.actualValues.length===planValues.length)
+      actualValues=d.actualValues.map(v=>Number(v)||0);
+    if(Array.isArray(d.appValues)&&d.appValues.length===planValues.length)
+      appValues=d.appValues.map(v=>Number(v)||0);
+  }catch(e){ console.warn('loadFromLocal:',e); }
+}
+function resetAll(){
+  if(!confirm('ต้องการรีเซ็ตค่า Actual และ VOCs APP ทั้งหมดเป็น 0 ใช่หรือไม่?')) return;
+  actualValues=planValues.map(()=>0); appValues=planValues.map(()=>0);
+  LS.remove(STORAGE_KEY); markLastUpdate();
+  renderHorizontalTable(); updateKPIs(); updateCharts();
+  showStatus('🔄 Reset complete');
+}
+
+/* ══════════════════════════════════════════
+   EXPORT CSV / JSON
+══════════════════════════════════════════ */
+function exportCSV(){
+  let csv='Category,Plan,Actual,Progress(%),VOCs APP,VOCs Progress(%)\n';
+  categories.forEach((cat,i)=>{
+    csv+=`"${cat}",${planValues[i]},${actualValues[i]},${calcProgress(actualValues[i],planValues[i])},${appValues[i]},${calcVocsProgress(appValues[i],actualValues[i])}\n`;
+  });
+  const tp=planValues.reduce((a,b)=>a+b,0),ta=actualValues.reduce((a,b)=>a+b,0),tv=appValues.reduce((a,b)=>a+b,0);
+  csv+=`"TOTAL",${tp},${ta},${tp?((ta/tp)*100).toFixed(1):0},${tv},${ta?((tv/ta)*100).toFixed(1):0}\n`;
+  dlFile(csv,'text/csv;charset=utf-8;','VOCs_SHIFT_B_2026_Report.csv');
+  showStatus('📥 CSV exported');
+}
+function buildJSONPayload(){
+  const tp=planValues.reduce((a,b)=>a+b,0),ta=actualValues.reduce((a,b)=>a+b,0),tv=appValues.reduce((a,b)=>a+b,0);
+  return{
+    meta:{title:"VOCs SHIFT B 2026",exportedAt:new Date().toISOString(),
+      lastUpdate:LS.get(LAST_UPDATE_KEY)||null,lastSaved:LS.get(LAST_SAVED_KEY)||null,
+      totalPlan:tp,totalActual:ta,totalApp:tv,
+      overallProgress:tp?+((ta/tp)*100).toFixed(1):0,
+      overallVocsProgress:ta?+((tv/ta)*100).toFixed(1):0},
+    actualValues:[...actualValues], appValues:[...appValues],
+    data:categories.map((cat,i)=>({
+      category:cat,plan:planValues[i],actual:actualValues[i],
+      progress_pct:+calcProgress(actualValues[i],planValues[i]),
+      vocsApp:appValues[i],vocsProgress_pct:+calcVocsProgress(appValues[i],actualValues[i])
+    }))
+  };
+}
+function exportJSON(){
+  const p=buildJSONPayload(); markLastSaved(p.meta.exportedAt);
+  dlFile(JSON.stringify(p,null,2),'application/json','VOCs_SHIFT_B_2026_Data.json');
+  showStatus('🗂️ JSON exported');
+}
+
+/* ══════════════════════════════════════════
+   GOOGLE DRIVE
+══════════════════════════════════════════ */
+function openGdriveModal(){ document.getElementById('gdriveModalBg').classList.add('open'); }
+function closeGdriveModal(){ document.getElementById('gdriveModalBg').classList.remove('open'); }
+function doGdriveSave(){
+  const p=buildJSONPayload(); markLastSaved(p.meta.exportedAt);
+  dlFile(JSON.stringify(p,null,2),'application/json','VOCs_SHIFT_B_2026_Data.json');
+  setTimeout(()=>window.open('https://drive.google.com/drive/my-drive','_blank'),400);
+  closeGdriveModal(); showStatus('☁️ JSON ready — upload to Drive!');
+}
+
+/* ══════════════════════════════════════════
+   IMPORT JSON
+══════════════════════════════════════════ */
+function importJSON(event){
+  const file=event.target.files&&event.target.files[0]; if(!file) return;
+  const reader=new FileReader();
+  reader.onload=function(e){
+    try{
+      const d=JSON.parse(e.target.result);
+      if(Array.isArray(d.actualValues)&&d.actualValues.length===planValues.length)
+        actualValues=d.actualValues.map(v=>Number(v)||0);
+      if(Array.isArray(d.appValues)&&d.appValues.length===planValues.length)
+        appValues=d.appValues.map(v=>Number(v)||0);
+      if(d.meta&&d.meta.lastUpdate) markLastUpdate(d.meta.lastUpdate); else markLastUpdate();
+      LS.set(STORAGE_KEY,JSON.stringify({actualValues:[...actualValues],appValues:[...appValues]}));
+      markLastSaved(); renderHorizontalTable(); updateKPIs(); updateCharts(); setMetaTexts();
+      showStatus('📤 JSON imported');
+    }catch(err){ alert('ไฟล์ JSON ไม่ถูกต้อง หรือรูปแบบข้อมูลไม่รองรับ'); }
+    finally{ event.target.value=''; }
+  };
+  reader.readAsText(file);
+}
+
+/* ══════════════════════════════════════════
+   DOWNLOAD HELPER
+══════════════════════════════════════════ */
+function dlFile(content,mime,filename){
+  const blob=new Blob([content],{type:mime});
+  const url=URL.createObjectURL(blob);
+  const a=document.createElement('a'); a.href=url; a.download=filename;
+  document.body.appendChild(a); a.click(); document.body.removeChild(a);
+  setTimeout(()=>URL.revokeObjectURL(url),1000);
+}
+
+/* ══════════════════════════════════════════
+   INIT
+══════════════════════════════════════════ */
+function initAppOnce(){
+  if(appInitialized) return;
+  loadFromLocal();
+  renderHorizontalTable();
+  updateKPIs(); setMetaTexts();
+  initCharts();
+  const imp=document.getElementById('importJsonFile');
+  if(imp) imp.addEventListener('change',importJSON);
+  appInitialized=true;
+}
+
+document.addEventListener('keydown',e=>{
+  if(e.key==='Enter'&&document.getElementById('loginScreen').style.display!=='none') login();
+});
+document.getElementById('gdriveModalBg').addEventListener('click',function(e){
+  if(e.target===this) closeGdriveModal();
+});
+
+checkLogin();
+
+let resizeTimer;
+window.addEventListener('resize',()=>{
+  clearTimeout(resizeTimer);
+  resizeTimer=setTimeout(()=>{
+    if(barChartInst)  barChartInst.resize();
+    if(progressDonut) progressDonut.resize();
+    if(vocsDonut)     vocsDonut.resize();
+  },150);
+});
+</script>
+
+							<script>
+                            	
+							</script>
+                        </body>
+                        </html>
+                    
